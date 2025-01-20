@@ -1,14 +1,24 @@
-//Copyright by Steve's Makerspace
-//Video: https://youtu.be/v0Br1dd3uHw
-// Takes 1-4 secs for a render.  If it's taking too long for you, you can reduce tries on line 5, increase skip on line 6 (may result in overlap), and decrease the canvas size.
-
-// jdk update: 2024-Dec 
+// =============================================================================
+// 프로그램 : 05-jdkart-RectanglePackinginaPerlinFlowField-v1
+// Created : 
+// 작가 :                     Original : Copyright by Steve's Makerspace / Video: https://youtu.be/v0Br1dd3uHw
+// Github : https://github.com/jdkjeong0815/05-jdkart-RectanglePackinginaPerlinFlowField-v1
+// Web : https://jdkjeong0815.github.io/05-jdkart-RectanglePackinginaPerlinFlowField-v1/
+// 작품 설명 : 
+// 라이브러리 기능 : jdklib.js
+// 주기적인 리로드 : 매  ??초
+// Last Update : 
+// 2025-Jan-19 요약
+//  - 1) 표준화 작업
+//  - 2) 
+// 2024-Dec-24 :
 //   1) 입력 없이 자동으로 지정된 시간에 따라 주기적으로 업데이트 되게 로직을 수정함
 //      randomizeInputs()
 //   2) 화면을 윈도우 화면 크기에 따라 결정
-//   3) 나무 에셋을 39개로 증가
-//   4) colors.json - 컬러 수를 늘림
+//   3) colors.json - 컬러 수를 늘림 
+// =============================================================================
 
+let saveFileName = "05-jdkart-RectanglePackinginaPerlinFlowField-v1";
 let tries; //attempts to place rectangles
 let skip = 10; //pixels to skip when checking available space
 let pixVary = 20; //for grain process
@@ -40,8 +50,6 @@ let col,
   midLeaf,
   timeLapse, treeFirst, center2,center3,center4,center5,center6,cN2,cN3,cN4,cN5,cN6,strokeType, rotPerc2,rotPerc3,rotPerc4,rotPerc5,rotPerc6;
 let img = [];
-
-
 let noiseTime = 0;
 
 function preload() {
@@ -55,7 +63,18 @@ function preload() {
   }
 }
 
+function touchStarted() {
+  // 첫 번째 터치: 풀스크린 활성화
+  let fs = fullscreen();
+  fullscreen(!fs);
+  
+  // setTimeout(newArt, 2000); //전체화면 리로드 전환 위해 2초로 설정
+  // return false; // 기본 터치 동작 방지
+}
+
+
 function setup() {
+  noScroll(); // 스크롤 금지. 스크롤바 생기는 것 방지
   palettesArray = Object.values(palettes); //turning the JSON file into an array
   palettesLength = palettesArray.length;
   let cnv;
